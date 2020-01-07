@@ -1,0 +1,17 @@
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.actions {
+  button,
+  a {
+    margin-left: 0.6rem;
+  }
+}
+.game-player {
+  display: flex;
+}
+app-player-select {
+  flex: 1 1 auto;
+  margin-right: 0.6rem;
+}

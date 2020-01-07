@@ -1,0 +1,43 @@
+
+<div class="players-list">
+  <form (ngSubmit)="add(playerForm)" #playerForm="ngForm">
+    <mat-form-field class="player-team">
+      <input matInput maxlength="4" placeholder="Team" name="team" [(ngModel)]="player.team" tabindex="1">
+      <button type="button" mat-button matSuffix mat-icon-button
+        aria-label="Clear" (click)="player.team=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field class="player-name">
+      <input matInput placeholder="Name" name="name" [(ngModel)]="player.name" tabindex="2">
+      <button type="button" mat-button matSuffix mat-icon-button
+        aria-label="Clear" (click)="player.name=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-button color="primary" type="submit" aria-label="Save player"
+      [disabled]="!playerForm.form.valid">
+      <mat-icon>done</mat-icon>
+    </button>
+  </form>
+
+  <mat-divider></mat-divider>
+
+  <mat-list>
+    <mat-list-item matRipple *ngFor="let player of players$ | async"
+    [class.selected]="player === selectedPlayer">
+      <div class="list-item-content"
+        (click)="selectPlayer(player)">
+        <span class="list-item-label">
+          {{ player.name | playerName:player.team }}
+        </span>
+      </div>
+      <button class="delete" mat-icon-button aria-label="Delete player"
+        (click)="delete(player)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+
+</div>
+

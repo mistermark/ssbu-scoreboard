@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+.score-number {
+  font-size: 2rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #eee;
+}
+
+mat-form-field {
+  width: 3.75rem;
+  margin-right: 0.6rem;
+}

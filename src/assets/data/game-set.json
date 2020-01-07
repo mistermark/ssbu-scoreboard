@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Player 1",
+    "team": "GTG",
+    "player": 1,
+    "fullname": "GTG | Player 1",
+    "character": "link",
+    "score": 0
+  },
+  {
+    "id": 2,
+    "name": "Player 2",
+    "team": "",
+    "player": 2,
+    "fullname": "Player 2",
+    "character": "ganondorf",
+    "score": 0
+  }
+]

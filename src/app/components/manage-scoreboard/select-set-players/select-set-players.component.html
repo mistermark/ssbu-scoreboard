@@ -1,0 +1,18 @@
+<mat-form-field>
+  <mat-label>Player 1</mat-label>
+  <mat-select [(ngModel)]="playerOne" (selectionChange)="updateSetPlayers($event)">
+    <mat-option *ngFor="let player of players$ | async" [value]="player">
+      {{ player.name | playerName:player.team }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Player 2</mat-label>
+  <mat-select [(ngModel)]="playerTwo" (selectionChange)="updateSetPlayers($event)">
+    <mat-option *ngFor="let player of players$ | async" [value]="player">
+      {{ player.name | playerName:player.team }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+

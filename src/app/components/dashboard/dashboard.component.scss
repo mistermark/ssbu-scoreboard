@@ -1,0 +1,19 @@
+.app-layout {
+  display: grid;
+  grid-template-areas: "scoreboard" "players";
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+}
+.app-header {
+  grid-area: header;
+}
+.app-scoreboard {
+  grid-area: scoreboard;
+}
+.app-players {
+  grid-area: players;
+}
+
+.dashboard-header {
+  padding: 1rem;
+}

@@ -1,0 +1,392 @@
+[
+  {
+    "name": "mario",
+    "image": "chara_0_ganon_00.png",
+    "title": "Mario"
+  },
+  {
+    "name": "donkey-kong",
+    "image": "chara_0_ganon_00.png",
+    "title": "Donkey Kong"
+  },
+  {
+    "name": "link",
+    "image": "chara_0_ganon_00.png",
+    "title": "Link"
+  },
+  {
+    "name": "samus",
+    "image": "chara_0_ganon_00.png",
+    "title": "Samus"
+  },
+  {
+    "name": "dark-samus",
+    "image": "chara_0_ganon_00.png",
+    "title": "Dark Samus"
+  },
+  {
+    "name": "yoshi",
+    "image": "chara_0_ganon_00.png",
+    "title": "Yoshi"
+  },
+  {
+    "name": "kirby",
+    "image": "chara_0_ganon_00.png",
+    "title": "Kirby"
+  },
+  {
+    "name": "fox",
+    "image": "chara_0_ganon_00.png",
+    "title": "Fox"
+  },
+  {
+    "name": "pikachu",
+    "image": "chara_0_ganon_00.png",
+    "title": "Pikachu"
+  },
+  {
+    "name": "luigi",
+    "image": "chara_0_ganon_00.png",
+    "title": "Luigi"
+  },
+  {
+    "name": "ness",
+    "image": "chara_0_ganon_00.png",
+    "title": "Ness"
+  },
+  {
+    "name": "captain-falcon",
+    "image": "chara_0_ganon_00.png",
+    "title": "Captain Falcon"
+  },
+  {
+    "name": "jigglypuff",
+    "image": "chara_0_ganon_00.png",
+    "title": "Jigglypuff"
+  },
+  {
+    "name": "peach",
+    "image": "chara_0_ganon_00.png",
+    "title": "Peach"
+  },
+  {
+    "name": "daisy",
+    "image": "chara_0_ganon_00.png",
+    "title": "Daisy"
+  },
+  {
+    "name": "bowser",
+    "image": "chara_0_ganon_00.png",
+    "title": "Bowser"
+  },
+  {
+    "name": "ice-climbers",
+    "image": "chara_0_ganon_00.png",
+    "title": "Ice Climbers"
+  },
+  {
+    "name": "sheik",
+    "image": "chara_0_ganon_00.png",
+    "title": "Sheik"
+  },
+  {
+    "name": "zelda",
+    "image": "chara_0_ganon_00.png",
+    "title": "Zelda"
+  },
+  {
+    "name": "dr-mario",
+    "image": "chara_0_ganon_00.png",
+    "title": "Dr Mario"
+  },
+  {
+    "name": "pichu",
+    "image": "chara_0_ganon_00.png",
+    "title": "Pichu"
+  },
+  {
+    "name": "falco",
+    "image": "chara_0_ganon_00.png",
+    "title": "Falco"
+  },
+  {
+    "name": "marth",
+    "image": "chara_0_ganon_00.png",
+    "title": "Marth"
+  },
+  {
+    "name": "lucina",
+    "image": "chara_0_ganon_00.png",
+    "title": "Lucina"
+  },
+  {
+    "name": "lucina",
+    "image": "chara_0_ganon_00.png",
+    "title": "Lucina"
+  },
+  {
+    "name": "young-link",
+    "image": "chara_0_ganon_00.png",
+    "title": "Young Link"
+  },
+  {
+    "name": "ganondorf",
+    "image": "chara_0_ganon_00.png",
+    "title": "Ganondorf"
+  },
+  {
+    "name": "mewtwo",
+    "image": "chara_0_ganon_00.png",
+    "title": "Mewtwo"
+  },
+  {
+    "name": "roy",
+    "image": "chara_0_ganon_00.png",
+    "title": "Roy"
+  },
+  {
+    "name": "chrom",
+    "image": "chara_0_ganon_00.png",
+    "title": "Chrom"
+  },
+  {
+    "name": "mr-game-watch",
+    "image": "chara_0_ganon_00.png",
+    "title": "Mr Game & Watch"
+  },
+  {
+    "name": "meta-knight",
+    "image": "chara_0_ganon_00.png",
+    "title": "Meta Knight"
+  },
+  {
+    "name": "pit",
+    "image": "chara_0_ganon_00.png",
+    "title": "Pit"
+  },
+  {
+    "name": "dark-pit",
+    "image": "chara_0_ganon_00.png",
+    "title": "Dark Pit"
+  },
+  {
+    "name": "zero-suit-samus",
+    "image": "chara_0_ganon_00.png",
+    "title": "Zero Suit Samus"
+  },
+  {
+    "name": "wario",
+    "image": "chara_0_ganon_00.png",
+    "title": "Wario"
+  },
+  {
+    "name": "snake",
+    "image": "chara_0_ganon_00.png",
+    "title": "Snake"
+  },
+  {
+    "name": "ike",
+    "image": "chara_0_ganon_00.png",
+    "title": "Ike"
+  },
+  {
+    "name": "pokemon-trainer",
+    "image": "chara_0_ganon_00.png",
+    "title": "Pokemon Trainer"
+  },
+  {
+    "name": "diddy-kong",
+    "image": "chara_0_ganon_00.png",
+    "title": "Diddy Kong"
+  },
+  {
+    "name": "lucas",
+    "image": "chara_0_ganon_00.png",
+    "title": "Lucas"
+  },
+  {
+    "name": "sonic",
+    "image": "chara_0_ganon_00.png",
+    "title": "Sonic"
+  },
+  {
+    "name": "king-dedede",
+    "image": "chara_0_ganon_00.png",
+    "title": "King Dedede"
+  },
+  {
+    "name": "olimar",
+    "image": "chara_0_ganon_00.png",
+    "title": "Olimar"
+  },
+  {
+    "name": "lucario",
+    "image": "chara_0_ganon_00.png",
+    "title": "Lucario"
+  },
+  {
+    "name": "rob",
+    "image": "chara_0_ganon_00.png",
+    "title": "R.O.B."
+  },
+  {
+    "name": "toon-link",
+    "image": "chara_0_ganon_00.png",
+    "title": "Toon Link"
+  },
+  {
+    "name": "wolf",
+    "image": "chara_0_ganon_00.png",
+    "title": "Wolf"
+  },
+  {
+    "name": "villager",
+    "image": "chara_0_ganon_00.png",
+    "title": "Villager"
+  },
+  {
+    "name": "mega-man",
+    "image": "chara_0_ganon_00.png",
+    "title": "Mega Man"
+  },
+  {
+    "name": "wii-fit-trainer",
+    "image": "chara_0_ganon_00.png",
+    "title": "Wii Fit Trainer"
+  },
+  {
+    "name": "rosalina-luma",
+    "image": "chara_0_ganon_00.png",
+    "title": "Rosalina & Luma"
+  },
+  {
+    "name": "little-mac",
+    "image": "chara_0_ganon_00.png",
+    "title": "Little Mac"
+  },
+  {
+    "name": "greninja",
+    "image": "chara_0_ganon_00.png",
+    "title": "Greninja"
+  },
+  {
+    "name": "mii-fighter",
+    "image": "chara_0_ganon_00.png",
+    "title": "Mii Fighter"
+  },
+  {
+    "name": "palutena",
+    "image": "chara_0_ganon_00.png",
+    "title": "Palutena"
+  },
+  {
+    "name": "pac-man",
+    "image": "chara_0_ganon_00.png",
+    "title": "Pac-Man"
+  },
+  {
+    "name": "robin",
+    "image": "chara_0_ganon_00.png",
+    "title": "Robin"
+  },
+  {
+    "name": "shulk",
+    "image": "chara_0_ganon_00.png",
+    "title": "Shulk"
+  },
+  {
+    "name": "bowser-jr",
+    "image": "chara_0_ganon_00.png",
+    "title": "Bowser Jr"
+  },
+  {
+    "name": "duck-hunt",
+    "image": "chara_0_ganon_00.png",
+    "title": "Duck Hunt"
+  },
+  {
+    "name": "ryu",
+    "image": "chara_0_ganon_00.png",
+    "title": "Ryu"
+  },
+  {
+    "name": "ken",
+    "image": "chara_0_ganon_00.png",
+    "title": "Ken"
+  },
+  {
+    "name": "cloud",
+    "image": "chara_0_ganon_00.png",
+    "title": "Cloud"
+  },
+  {
+    "name": "corrin",
+    "image": "chara_0_ganon_00.png",
+    "title": "Corrin"
+  },
+  {
+    "name": "bayonetta",
+    "image": "chara_0_ganon_00.png",
+    "title": "Bayonetta"
+  },
+  {
+    "name": "inkling",
+    "image": "chara_0_ganon_00.png",
+    "title": "Inkling"
+  },
+  {
+    "name": "ridley",
+    "image": "chara_0_ganon_00.png",
+    "title": "Ridley"
+  },
+  {
+    "name": "simon",
+    "image": "chara_0_ganon_00.png",
+    "title": "Simon"
+  },
+  {
+    "name": "richter",
+    "image": "chara_0_ganon_00.png",
+    "title": "Richter"
+  },
+  {
+    "name": "king-k-rool",
+    "image": "chara_0_ganon_00.png",
+    "title": "King K. Rool"
+  },
+  {
+    "name": "isabelle",
+    "image": "chara_0_ganon_00.png",
+    "title": "Isabelle"
+  },
+  {
+    "name": "incineroar",
+    "image": "chara_0_ganon_00.png",
+    "title": "Incineroar"
+  },
+  {
+    "name": "piranha-plant",
+    "image": "chara_0_ganon_00.png",
+    "title": "Piranha Plant"
+  },
+  {
+    "name": "joker",
+    "image": "chara_0_ganon_00.png",
+    "title": "Joker"
+  },
+  {
+    "name": "hero",
+    "image": "chara_0_ganon_00.png",
+    "title": "Hero"
+  },
+  {
+    "name": "banjo-kazooie",
+    "image": "chara_0_ganon_00.png",
+    "title": "Banjo & Kazooie"
+  },
+  {
+    "name": "terry",
+    "image": "chara_0_ganon_00.png",
+    "title": "Terry"
+  }
+]

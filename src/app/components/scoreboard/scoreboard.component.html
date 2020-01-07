@@ -1,0 +1,6 @@
+<app-player-score *ngFor="let player of (gameSet$ | async)"
+  [name]="player.fullname | uppercase"
+  [arrange]="player.player"
+  [character]="player.character"
+  [score]="player.score"
+></app-player-score>

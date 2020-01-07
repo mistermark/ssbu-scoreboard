@@ -1,0 +1,11 @@
+<div class="score-number">
+  <span class="score">
+    <ng-container *ngIf="gameSet$ | async as gameSet">{{ gameSet[playerNumber - 1].score }}</ng-container>
+  </span>
+</div>
+<button (click)="updateScore('INC')" mat-icon-button color="primary" aria-label="Increase score for Player">
+  <mat-icon>add_circle</mat-icon>
+</button>
+<button (click)="updateScore('DEC')" mat-icon-button color="primary" aria-label="Decrease score for Player">
+  <mat-icon>remove_circle</mat-icon>
+</button>
