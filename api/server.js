@@ -1,5 +1,6 @@
 let express = require("express"),
   path = require("path"),
+  createError = require("http-errors"),
   mongoose = require("mongoose"),
   cors = require("cors"),
   bodyParser = require("body-parser"),
@@ -26,6 +27,7 @@ mongoose
 
 // Setting up port with express js
 const playerRoute = require("../api/routes/player.route");
+const gamesetRoute = require("../api/routes/gameset.route");
 const app = express();
 app.use(bodyParser.json());
 app.use(
@@ -36,7 +38,8 @@ app.use(
 app.use(cors());
 app.use(express.static(path.join(__dirname, "dist/mean-stack-crud-app")));
 app.use("/", express.static(path.join(__dirname, "dist/mean-stack-crud-app")));
-app.use("/api", playerRoute);
+app.use("/api/players", playerRoute);
+app.use("/api/sets", gamesetRoute);
 
 // Create port
 const port = process.env.PORT || 4000;

@@ -73,7 +73,7 @@ exports.delete = (req, res, next) => {
     .then(player => {
       if (!player) {
         return res.status(404).send({
-          message: "Player not found with id " + req.params.productId
+          message: "Player not found with id " + req.params.id
         });
       }
       res.send({ message: "Player deleted successfully!" });
@@ -81,11 +81,11 @@ exports.delete = (req, res, next) => {
     .catch(err => {
       if (err.kind === "ObjectId" || err.name === "NotFound") {
         return res.status(404).send({
-          message: "Player not found with id " + req.params.productId
+          message: "Player not found with id " + req.params.id
         });
       }
       return res.status(500).send({
-        message: "Could not delete player with id " + req.params.productId
+        message: "Could not delete player with id " + req.params.id
       });
     });
 };

@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema(
   {
-    game: {
-      type: String
+    game: Number,
+    player1: {
+      player: Object,
+      score: Number
     },
-    player_1: {
-      type: String
-    },
-    player_2: {
-      type: String
+    player2: {
+      player: Object,
+      score: Number
     }
   },
   {
