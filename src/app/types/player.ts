@@ -1,16 +1,18 @@
-export interface RawPlayer {
+export interface Player {
   name: string;
   team?: string;
   _id?: string;
 }
 
-export interface Player extends RawPlayer {
-  fullname?: string;
-  [name: string]: string | number;
-}
-
 export interface SetPlayer extends Player {
   character?: string;
   score: number;
-  player: number;
+}
+
+export interface GameSet {
+  _id: any;
+  game: number;
+  gameId: string;
+  player1: Player;
+  player2: Player;
 }

@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
@@ -32,6 +32,7 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { PlayersListComponent } from './components/manage-players/players-list/players-list.component';
 import { PlayerDetailsComponent } from './components/manage-players/player-details/player-details.component';
 import { PlayerNamePipe } from './modules/player-fullname.pipe';
+import { SelectGamesetComponent } from './components/manage-scoreboard/select-gameset/select-gameset.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { PlayerNamePipe } from './modules/player-fullname.pipe';
     MessagesComponent,
     PlayersListComponent,
     PlayerDetailsComponent,
-    PlayerNamePipe
+    PlayerNamePipe,
+    SelectGamesetComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,7 @@ import { PlayerNamePipe } from './modules/player-fullname.pipe';
     MatDividerModule,
     MatListModule,
     FormsModule,
+    ReactiveFormsModule,
     MatRippleModule,
     MatCardModule,
     MatSnackBarModule

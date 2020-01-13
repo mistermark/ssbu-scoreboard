@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { map, filter, tap } from 'rxjs/operators';
 
-import { Player, SetPlayer } from '../../types';
+import { Player, SetPlayer, GameSet } from '../../types';
 
 import { StorageService } from '../storage/storage.service';
+import { GamesetApiService } from '../gameset-api/gameset-api.service';
+import { NotificationService } from '../notification/notification.service';
+import { PlayerNamePipe } from 'src/app/modules/player-fullname.pipe';
 
 const STORAGE_NAME = 'ssbu-game-set';
 
@@ -11,66 +15,78 @@ const STORAGE_NAME = 'ssbu-game-set';
   providedIn: 'root'
 })
 export class GameSetService {
-  private readonly gamePlayersSubject = new BehaviorSubject<Player[]>([]);
-  gamePlayers$ = this.gamePlayersSubject.asObservable();
-
-  private gameSetSubject = new BehaviorSubject<SetPlayer[]>([]);
+  private gameSetSubject = new BehaviorSubject<GameSet | undefined>(undefined);
   gameSet$ = this.gameSetSubject.asObservable();
 
-  getInterval = 1000;
-  setInterval: any;
+  private gameSetsListSubject = new BehaviorSubject<GameSet[] | undefined>(
+    undefined
+  );
+  gameSetsList$ = this.gameSetsListSubject.asObservable();
 
-  constructor(protected storageService: StorageService) {}
+  // getInterval = 1000;
+  // setInterval: any;
 
-  private _makeGamePlayer(player: Player, order: number): SetPlayer {
-    const addedMeta = { player: order, score: 0, character: 'none' };
-    const extended = { ...addedMeta, ...player };
-
-    return extended;
+  constructor(
+    protected gamesetApiService: GamesetApiService,
+    private notificationService: NotificationService,
+    private playerNamePipe: PlayerNamePipe
+  ) {
+    this.getGameSetsList();
   }
 
-  private _saveToStore(gameSetData: SetPlayer[]) {
-    this.gameSetSubject.next(gameSetData);
-    this.storageService.set(STORAGE_NAME, gameSetData);
+  selectGameSet(gameset): void {
+    this.gameSetSubject.next(gameset);
   }
 
-  save() {
-    const gameSetPlayers: SetPlayer[] = this.gameSetSubject.value;
-    this.storageService.set(STORAGE_NAME, gameSetPlayers);
+  create(gamesetObject): void {
+    const lastGameNumber = this.gameSetsListSubject.value[
+      this.gameSetsListSubject.value.length - 1
+    ].game;
+    gamesetObject.game = lastGameNumber + 1;
+    this.gamesetApiService.create(gamesetObject).subscribe(data => {
+      this.gameSetSubject.next(data);
+      this.notificationService.notify(`New GameSet has been created.`, 'OK');
+    });
   }
 
-  get(poll?: boolean) {
-    this.gameSetSubject.next(this.storageService.get(STORAGE_NAME));
-
-    if (poll) {
-      this.setInterval = setInterval(() => {
-        this.gameSetSubject.next(this.storageService.get(STORAGE_NAME));
-      }, this.getInterval);
-    }
+  update(setObject: GameSet): void {
+    this.gamesetApiService.update(setObject).subscribe(data => {
+      this.notificationService.notify(
+        `GameSet #${data.game} has been updated.`,
+        'OK'
+      );
+    });
   }
 
-  update(player: Player, order: number) {
-    let currentPlayers = [];
-    const extendedPlayer = this._makeGamePlayer(player, order);
-
-    if (this.gameSetSubject.value.indexOf(extendedPlayer) === -1) {
-      currentPlayers = this.gamePlayersSubject.value;
-      currentPlayers[order - 1] = extendedPlayer;
-    }
-    // this.gameSetSubject.next(currentPlayers);
-    this._saveToStore(currentPlayers);
+  delete(gameset: GameSet): void {
+    this.gamesetApiService.delete(gameset._id).subscribe(data => {
+      this.notificationService.notify(
+        `Game #${gameset.game}"
+        has been deleted.`,
+        'OK'
+      );
+      this.getGameSetsList();
+    });
   }
 
-  updateScore(score: SetPlayer) {
-    const currentGameSet = this.gameSetSubject.value;
-    currentGameSet[score.player - 1].score = score.score;
-
-    this._saveToStore(currentGameSet);
-  }
-
-  reset() {
-    this.storageService.remove(STORAGE_NAME);
-    this.gamePlayersSubject.next([]);
-    this.gameSetSubject.next([]);
+  getGameSetsList(): void {
+    this.gamesetApiService
+      .getGameSetsList()
+      .pipe(
+        map((gamesetsList: GameSet[]) =>
+          gamesetsList.filter(gameSet => gameSet.player1 !== undefined)
+        )
+      )
+      .subscribe(
+        setsList => {
+          this.gameSetsListSubject.next(setsList);
+        },
+        err => {
+          this.notificationService.notify(
+            `Couldn't fetch game-sets.`,
+            'Dismiss'
+          );
+        }
+      );
   }
 }

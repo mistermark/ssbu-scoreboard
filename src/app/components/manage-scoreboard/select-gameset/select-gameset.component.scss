@@ -1,0 +1,15 @@
+mat-form-field {
+  width: 100%;
+}
+.manage-gameset {
+  display: flex;
+  form {
+    flex: 1;
+  }
+}
+
+.gameset-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}

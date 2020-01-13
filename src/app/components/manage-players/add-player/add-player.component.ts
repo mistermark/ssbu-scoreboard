@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { map, take } from 'rxjs/operators';
 
 import { PlayersService } from '../../../services/players/players.service';
-import { RawPlayer, Player } from '../../../types';
+import { Player } from '../../../types';
 
 @Component({
   selector: 'app-add-player',
@@ -13,7 +13,7 @@ export class AddPlayerComponent implements OnInit {
   name = 'Player Name';
   team = 'Team';
 
-  player: RawPlayer = {
+  player: Player = {
     name: '',
     team: ''
   };

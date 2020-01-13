@@ -1,37 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { Player } from 'src/app/types';
-import { NotificationService } from '../notification/notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayersApiService {
-  constructor(private readonly http: HttpClient) {}
-
-  private playersUrl = 'http://localhost:4000/api'; // URL to web api
+  private playersUrl = 'http://localhost:4000/api/players'; // URL to web api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  constructor(private readonly http: HttpClient) {}
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
 
   getPlayers(): Observable<Player[]> {
-    return this.http.get<Player[]>(`${this.playersUrl}/players`);
+    return this.http.get<Player[]>(`${this.playersUrl}`);
   }
 
   getPlayer(id: number): Observable<Player> {
@@ -57,7 +51,7 @@ export class PlayersApiService {
   /** POST: add a new player to the db */
   addPlayer(player: Player): Observable<Player> {
     return this.http
-      .post<Player>(`${this.playersUrl}/add`, player, this.httpOptions)
+      .post<Player>(`${this.playersUrl}/create`, player, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 

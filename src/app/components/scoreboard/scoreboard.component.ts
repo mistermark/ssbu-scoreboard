@@ -8,11 +8,11 @@ import { GameSetService } from '../../services/game-set/game-set.service';
   styleUrls: ['./scoreboard.component.scss']
 })
 export class ScoreboardComponent implements OnInit {
-  gameSet$ = this.gameSetService.gameSet$;
+  // gameSet$ = this.gameSetService.gameSet$;
 
   constructor(private readonly gameSetService: GameSetService) {}
 
   ngOnInit() {
-    this.gameSetService.get(true);
+    // this.gameSetService.get(true);
   }
 }

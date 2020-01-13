@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
 
-import { Player, RawPlayer } from '../../types';
+import { Player } from '../../types';
 import { PlayersApiService } from '../players-api/players-api.service';
 import { StorageService } from '../storage/storage.service';
 import { MessageService } from '../message/message.service';
@@ -40,18 +40,6 @@ export class PlayersService {
   private readonly playersSubject = new BehaviorSubject<Player[]>([]);
   players$ = this.playersSubject.asObservable();
 
-  // private readonly playersSetSubject = new BehaviorSubject<Player[]>([]);
-  // playersSet$ = this.playersSetSubject.asObservable();
-
-  // private _makePlayer(player: RawPlayer): Player {
-  //   const playerMeta = {
-  //     id: 0,
-  //     fullname: player.team + ' | ' + player.name
-  //   };
-
-  //   return { ...playerMeta, ...player };
-  // }
-
   getPlayers(): void {
     this.playersApiService.getPlayers().subscribe(
       players => {
@@ -63,11 +51,16 @@ export class PlayersService {
     );
   }
 
-  getPlayer(id: number): void {}
-
   updatePlayer(player: Player): void {
     this.playersApiService.updatePlayer(player).subscribe(data => {
       this.getPlayers();
+      this.notificationService.notify(
+        `"${this.playerNamePipe.transform(
+          player.name,
+          player.team
+        )}" has been updated.`,
+        'OK'
+      );
     });
   }
 
@@ -107,18 +100,5 @@ export class PlayersService {
   resetPlayers(): void {
     this.storageService.remove(STORAGE_NAME);
     this.playersSubject.next([]);
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 import { Player } from '../../../types';
 import { PlayersService } from '../../../services/players/players.service';
@@ -19,15 +20,9 @@ export class PlayerDetailsComponent implements OnInit {
 
   ngOnInit() {}
 
-  // getPlayer(): void {
-  //   const id = +this.route.snapshot.paramMap.get('id');
-  //   this.playersService
-  //     .getPlayer(id)
-  //     .subscribe(player => (this.player = player));
-  // }
+  save(playerDetailsForm: NgForm): void {
+    const player = playerDetailsForm.form.value;
 
-  save(player: Player): void {
-    console.log(player);
     this.playersService.updatePlayer(player);
   }
 

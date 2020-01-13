@@ -10,16 +10,8 @@ import { GameSetService } from '../../services/game-set/game-set.service';
 export class ManageScoreboardComponent implements OnInit {
   constructor(private readonly gameSetService: GameSetService) {}
 
-  gameSet$ = this.gameSetService.gamePlayers$;
-
   ngOnInit() {}
 
-  resetGameSet() {
-    this.gameSetService.reset();
-  }
-  saveGameSet() {
-    this.gameSetService.save();
-  }
   launchScoreboard() {
     window.open('/scoreboard', '_blank');
   }

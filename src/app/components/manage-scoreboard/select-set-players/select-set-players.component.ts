@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { tap, map, take, filter } from 'rxjs/operators';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { NgForm, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 import { PlayersService } from '../../../services/players/players.service';
 import { GameSetService } from '../../../services/game-set/game-set.service';
-import { Player, SetPlayer } from '../../../types';
 
 @Component({
   selector: 'app-select-set-players',
@@ -11,41 +10,58 @@ import { Player, SetPlayer } from '../../../types';
   styleUrls: ['./select-set-players.component.scss']
 })
 export class SelectSetPlayersComponent implements OnInit {
-  // @Input() playerNumber: number;
-
-  // setPlayers: SetPlayer[] = [];
-
   players$ = this.playersService.players$;
 
-  // currentSetPlayers = this.gameSetService.gameSet$;
+  gameset$ = this.gameSetService.gameSet$;
 
-  // selectedPlayer: any;
+  gameSetForm: FormGroup;
 
   constructor(
     private readonly playersService: PlayersService,
-    private readonly gameSetService: GameSetService
+    private readonly gameSetService: GameSetService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
-    // this.playersService.getPlayers();
-    // this.gameSetService.get();
-    // this.gameSetService.gameSet$
-    //   .pipe(
-    //     take(1),
-    //     map((currentSet: SetPlayer[]) =>
-    //       currentSet.filter(
-    //         (currentPlayer: SetPlayer) =>
-    //           currentPlayer.player === this.playerNumber
-    //       )
-    //     ),
-    //     map((currentSetPlayer: SetPlayer[]) => currentSetPlayer[0]._id)
-    //   )
-    //   .subscribe(playerId => (this.selectedPlayer = playerId));
+    this.gameSetForm = this.formBuilder.group({
+      game: new FormControl(''),
+      _id: new FormControl(''),
+      player1: new FormGroup({
+        player: new FormControl({}),
+        score: new FormControl(0)
+      }),
+      player2: new FormGroup({
+        player: new FormControl({}),
+        score: new FormControl(0)
+      })
+    });
+
+    this.gameSetService.gameSet$.subscribe((data: any) => {
+      if (!data) {
+        return;
+      }
+      if (data.gameset) {
+        this.gameSetForm.patchValue(data.gameset);
+      } else {
+        this.gameSetForm.patchValue({
+          game: data.game,
+          _id: data._id,
+          player1: data.player1,
+          player2: data.player2
+        });
+      }
+    });
+
+    this.onChanges();
   }
 
-  updateSetPlayers(event) {
-    console.log(event);
-    // const playerObject = this.playersService.getPlayer(event.value);
-    // this.gameSetService.update(playerObject, this.playerNumber);
+  compareValFn(obj1: any, obj2: any) {
+    return obj1 && obj2 && obj1._id === obj2._id;
+  }
+
+  onChanges(): void {}
+
+  update(): void {
+    this.gameSetService.update(this.gameSetForm.value);
   }
 }

@@ -1,18 +1,56 @@
-<mat-form-field>
-  <mat-label>Player 1</mat-label>
-  <mat-select [(ngModel)]="playerOne" (selectionChange)="updateSetPlayers($event)">
-    <mat-option *ngFor="let player of players$ | async" [value]="player">
-      {{ player.name | playerName:player.team }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<div *ngIf="gameset$ | async as gameSet">
 
-<mat-form-field>
-  <mat-label>Player 2</mat-label>
-  <mat-select [(ngModel)]="playerTwo" (selectionChange)="updateSetPlayers($event)">
-    <mat-option *ngFor="let player of players$ | async" [value]="player">
-      {{ player.name | playerName:player.team }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+  <h3>Players for Game {{ gameSet.game }}</h3>
 
+  <form (ngSubmit)="update()" [formGroup]="gameSetForm">
+
+    <input type="hidden" formControlName="game" [value]="gameSet.game">
+    <input type="hidden" formControlName="_id" [value]="gameSet._id">
+
+    <div class="set-players">
+      <div class="set-player" formGroupName="player1">
+        <mat-form-field>
+          <mat-label>Player 1</mat-label>
+          <mat-select formControlName="player" [compareWith]="compareValFn">
+            <mat-option *ngFor="let player of players$ | async" [value]="player">
+              {{ player.name | playerName:player.team }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="gameSetForm.value.player1.player.name">
+          <mat-label>Score</mat-label>
+          <input #player1Score matInput formControlName="score"
+          placeholder="Score" type="number">
+        </mat-form-field>
+
+      </div>
+
+      <div class="set-player" formGroupName="player2">
+        <mat-form-field>
+          <mat-label>Player 2</mat-label>
+          <mat-select formControlName="player" [compareWith]="compareValFn">
+            <mat-option *ngFor="let player of players$ | async" [value]="player">
+              {{ player.name | playerName:player.team }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="gameSetForm.value.player2.player.name">
+          <mat-label>Score</mat-label>
+          <input #player2Score matInput formControlName="score"
+          placeholder="Score" type="number">
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div class="form-actions">
+      <button mat-button color="primary" type="submit" aria-label="Save">
+        <mat-icon>done</mat-icon>
+      </button>
+    </div>
+
+  </form>
+
+</div>

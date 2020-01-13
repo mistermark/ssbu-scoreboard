@@ -3,19 +3,24 @@
     <div mat-card-avatar><mat-icon>face</mat-icon> </div>
     <mat-card-title>Player Details</mat-card-title>
   </mat-card-header>
-  <form (ngSubmit)="save(player)" #playerDetailsForm="ngForm">
+  <form (ngSubmit)="save(playerDetailsForm)" #playerDetailsForm="ngForm">
+    <input type="hidden" [(ngModel)]="player._id" name="_id">
     <mat-card-content>
 
       <mat-form-field class="player-team">
-        <input matInput maxlength="4" placeholder="Team" name="team" [(ngModel)]="player.team">
-        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="player.team=''">
+        <input matInput [(ngModel)]="player.team"
+          maxlength="4" placeholder="Team" name="team">
+        <button (click)="player.team=''" mat-button matSuffix mat-icon-button aria-label="Clear"
+          type="button" tabindex="-1">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
 
       <mat-form-field class="player-name">
-        <input matInput maxlength="40" placeholder="Name" name="name" [(ngModel)]="player.name">
-        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="player.name=''">
+        <input matInput [(ngModel)]="player.name"
+          maxlength="40" placeholder="Name" name="name">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="player.name=''"
+          type="button" tabindex="-1">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
