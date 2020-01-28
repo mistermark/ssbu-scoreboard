@@ -23,6 +23,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { appRoutes } from './modules/routing.config';
 import { AppComponent } from './app.component';
@@ -46,6 +47,7 @@ import { ImagePathPipe } from './modules/image-path.pipe';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ManageStagesComponent } from './components/manage-stages/manage-stages.component';
 import { StageTypePipe } from './modules/stage-type.pipe';
+import { UploadComponent } from './components/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,8 @@ import { StageTypePipe } from './modules/stage-type.pipe';
     ImagePathPipe,
     DialogComponent,
     ManageStagesComponent,
-    StageTypePipe
+    StageTypePipe,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +98,7 @@ import { StageTypePipe } from './modules/stage-type.pipe';
     MatDialogModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatProgressBarModule,
     MatExpansionModule
   ],
   providers: [PlayerNamePipe],

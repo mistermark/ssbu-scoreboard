@@ -1,0 +1,24 @@
+<div class="container">
+  <label>Upload File</label>
+  <div class="upload-controls">
+    <input type="file" #file (change)="onFilesAdded($event.target.files)"/>
+    <div class="upload-action">
+      <button
+        [disabled]="uploading"
+        mat-raised-button
+        color="primary"
+        class="add-files-btn"
+        (click)="addFiles()"
+        type="button">
+        Add File
+      </button>
+    </div>
+    <div class="upload-filename">{{ fileToUpload?.name }}</div>
+    <mat-progress-bar
+        *ngIf="progress"
+        mode="determinate"
+        [value]="progress[fileToUpload.name].progress | async"
+      ></mat-progress-bar>
+  </div>
+
+</div>

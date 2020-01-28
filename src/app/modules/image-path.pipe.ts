@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: true
 })
 export class ImagePathPipe implements PipeTransform {
-  imageFileStorePath = '/assets/images';
+  imageFileStorePath = '/assets/uploads';
 
-  transform(imageFileName: string, imageType: string): string {
-    return `${this.imageFileStorePath}/${imageType}/${imageFileName}`;
+  transform(imageFileName: string): string {
+    return `${this.imageFileStorePath}/${imageFileName}`;
   }
 }

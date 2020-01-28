@@ -34,14 +34,24 @@ const gamesetRoute = require("../api/routes/gameset.route");
 const liveGameRoute = require("../api/routes/livegame.route");
 const characterRoute = require("../api/routes/character.route");
 const stageRoute = require("../api/routes/stage.route");
+const uploadRoute = require("../api/routes/upload.route");
 const app = express();
+
+global.uploadDir = path.resolve(
+  path.join(__dirname, "../", "src/assets/uploads")
+);
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: false
   })
 );
-app.use(cors());
+var corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, "dist/mean-stack-crud-app")));
 app.use("/", express.static(path.join(__dirname, "dist/mean-stack-crud-app")));
 app.use("/api/players", playerRoute);
@@ -49,6 +59,7 @@ app.use("/api/sets", gamesetRoute);
 app.use("/api/live", liveGameRoute);
 app.use("/api/characters", characterRoute);
 app.use("/api/stages", stageRoute);
+app.use("/api/upload", uploadRoute);
 
 // Create port
 const port = process.env.PORT || 4000;

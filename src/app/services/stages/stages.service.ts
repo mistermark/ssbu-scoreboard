@@ -33,7 +33,7 @@ export class StagesService {
         stages => {
           stages.map(stage => {
             stage.styles = {
-              'background-image': `url(/assets/images/stages/${stage.image})`
+              'background-image': `url(/assets/uploads/${stage.image})`
             };
           });
           this.stagesListSubject.next(stages);

@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+label {
+  padding-bottom: 0.5rem;
+}
+.actions {
+  justify-content: flex-end;
+}
+input[type="file"] {
+  display: none;
+}
+.upload-controls {
+  display: flex;
+  align-items: center;
+}
+.upload-filename {
+  padding: 0 0.6rem;
+  flex-grow: 1;
+}
+.mat-progress-bar {
+  flex-grow: 0;
+}

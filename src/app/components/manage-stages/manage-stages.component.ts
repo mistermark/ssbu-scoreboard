@@ -53,4 +53,10 @@ export class ManageStagesComponent {
     this.stagesService.delete(stage);
     // this.updateStageForm.reset();
   }
+
+  uploadFinished(uploadedFile: any) {
+    this.createStageForm.patchValue({
+      image: uploadedFile.file
+    });
+  }
 }

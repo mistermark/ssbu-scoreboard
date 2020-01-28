@@ -9,9 +9,10 @@
           <mat-form-field class="stage-name">
             <input matInput #stageName formControlName="name" placeholder="Stage Name" type="text">
           </mat-form-field>
-          <mat-form-field class="stage-image">
-            <input matInput #stageImage formControlName="image" placeholder="Image" type="text">
-          </mat-form-field>
+          <div class="stage-image">
+            <input #stageImage formControlName="image" type="hidden">
+            <app-upload (uploaded)="uploadFinished($event)"></app-upload>
+          </div>
           <div>
             <label id="stage-type-label">Stage Type:</label>
             <mat-radio-group #stageType formControlName="type" required="true" aria-labelledby="stage-type-label">
@@ -62,14 +63,14 @@
       <mat-card-header>
         <div mat-card-avatar *ngIf="selectedStage$ | async as selectedStage; else noStageAvatar">
           <div class="stage-avatar"
-            [ngStyle]="{'background-image': 'url('+ (selectedStage.image | imagePath:'stages') + ')'}"
+            [ngStyle]="{'background-image': 'url('+ (selectedStage.image | imagePath) + ')'}"
             [class.no-avatar]="selectedStage">
           </div>
         </div>
         <ng-template #noStageAvatar>
           <div mat-card-avatar>
             <div class="stage-avatar"
-              [ngStyle]="{'background-image': 'url('+ ('stage_2_Random.png' | imagePath:'stages') + ')'}">
+              [ngStyle]="{'background-image': 'url('+ ('stage_2_Random.png' | imagePath) + ')'}">
             </div>
           </div>
         </ng-template>
@@ -83,7 +84,7 @@
             <dt>Type:</dt>
             <dd>{{ selectedStage.type | stageType }}</dd>
             <dt>Image</dt>
-            <dd><img src="/assets/images/stages/{{ selectedStage.image }}" alt=""></dd>
+            <dd><img src="{{ selectedStage.image | imagePath }}" alt=""></dd>
           </dl>
         </ng-container>
         <ng-template #noSelectedStage>
