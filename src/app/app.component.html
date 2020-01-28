@@ -1,1 +1,24 @@
-<router-outlet></router-outlet>
+<div class="app-layout">
+  <app-page-header>SSBU Scoreboard</app-page-header>
+  <mat-sidenav-container class="app-content">
+    <mat-sidenav #sidenav mode="side" opened>
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let navItem of navItems" [routerLink]="[navItem.route]"
+          [routerLinkActive]="'active'">
+          {{ navItem.label }}
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- <div class="app-scoreboard">
+    <app-manage-scoreboard></app-manage-scoreboard>
+  </div>
+  <div class="app-players">
+    <app-manage-players></app-manage-players>
+  </div> -->
+</div>
+

@@ -7,4 +7,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'SSBU Scoreboard';
+  navItems = [
+    {
+      label: 'Sets',
+      route: '/sets'
+    },
+    {
+      label: 'Players',
+      route: '/players'
+    },
+    {
+      label: 'Characters',
+      route: '/characters'
+    },
+    {
+      label: 'Stages',
+      route: '/stages'
+    }
+  ];
 }

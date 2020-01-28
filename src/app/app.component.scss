@@ -1,0 +1,38 @@
+.app-layout {
+  display: grid;
+  grid-template-areas: "header" "app-content";
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  width: 100vw;
+  height: 100vh;
+
+  .app-header {
+    grid-area: header;
+    padding: 1rem;
+  }
+  .aside-content {
+    grid-area: app-content;
+  }
+  mat-sidenav {
+    width: 12rem;
+    padding: 1rem;
+  }
+  mat-sidenav-content {
+    padding: 1rem;
+  }
+  .mat-list-item {
+    &.active {
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+  }
+}
+.app-scoreboard {
+  grid-area: scoreboard;
+}
+.app-players {
+  grid-area: players;
+}
+
+.dashboard-header {
+  padding: 1rem;
+}

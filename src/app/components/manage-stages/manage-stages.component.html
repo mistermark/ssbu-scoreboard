@@ -1,0 +1,95 @@
+<div class="manage-form">
+  <div class="col-1">
+    <mat-accordion multi="true">
+      <mat-expansion-panel class="add-single-stage">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Add new Stage</mat-panel-title>
+        </mat-expansion-panel-header>
+        <form [formGroup]="createStageForm" (ngSubmit)="create()">
+          <mat-form-field class="stage-name">
+            <input matInput #stageName formControlName="name" placeholder="Stage Name" type="text">
+          </mat-form-field>
+          <mat-form-field class="stage-image">
+            <input matInput #stageImage formControlName="image" placeholder="Image" type="text">
+          </mat-form-field>
+          <div>
+            <label id="stage-type-label">Stage Type:</label>
+            <mat-radio-group #stageType formControlName="type" required="true" aria-labelledby="stage-type-label">
+              <mat-radio-button value="starter">Starter Stage</mat-radio-button>
+              <mat-radio-button value="counter">Counter Pick</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <mat-form-field class="stage-roster">
+            <input matInput #stageRoster formControlName="roster" placeholder="Roster Position" type="number">
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" aria-label="Save Stage">
+            <mat-icon>done</mat-icon>
+            <span>Add Stage</span>
+          </button>
+        </form>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            List of Stages
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="stages-list">
+          <ng-container *ngIf="stagesList$ | async as stagesList; else noStages">
+            <mat-grid-list cols="4">
+              <mat-grid-tile *ngFor="let stage of stagesList"
+                [class.selected]="(selectedStage$ | async) === stage">
+                <a class="stage" [ngStyle]="stage.styles" (click)="selectStage(stage)">
+                  <div class="stage-name">
+                    <span>{{ stage.name }}</span>
+                  </div>
+                  <div class="list-item-controls">
+                    <mat-icon aria-label="Delete" (click)="delete(stage)">delete</mat-icon>
+                  </div>
+                </a>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </ng-container>
+          <ng-template #noStages>
+            <p>No stages found.</p>
+          </ng-template>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="col-2">
+    <mat-card class="stage-details">
+      <mat-card-header>
+        <div mat-card-avatar *ngIf="selectedStage$ | async as selectedStage; else noStageAvatar">
+          <div class="stage-avatar"
+            [ngStyle]="{'background-image': 'url('+ (selectedStage.image | imagePath:'stages') + ')'}"
+            [class.no-avatar]="selectedStage">
+          </div>
+        </div>
+        <ng-template #noStageAvatar>
+          <div mat-card-avatar>
+            <div class="stage-avatar"
+              [ngStyle]="{'background-image': 'url('+ ('stage_2_Random.png' | imagePath:'stages') + ')'}">
+            </div>
+          </div>
+        </ng-template>
+        <mat-card-title>Stage Details</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ng-container *ngIf="selectedStage$ | async as selectedStage; else noSelectedStage">
+          <dl>
+            <dt>Name:</dt>
+            <dd>{{ selectedStage.name }}</dd>
+            <dt>Type:</dt>
+            <dd>{{ selectedStage.type | stageType }}</dd>
+            <dt>Image</dt>
+            <dd><img src="/assets/images/stages/{{ selectedStage.image }}" alt=""></dd>
+          </dl>
+        </ng-container>
+        <ng-template #noSelectedStage>
+          <p>No stage selected.</p>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

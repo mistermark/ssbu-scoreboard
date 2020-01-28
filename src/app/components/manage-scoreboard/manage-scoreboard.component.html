@@ -1,22 +1,201 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <h3>Scoreboard</h3>
-    <span class="toolbar-spacer"></span>
-    <div class="actions">
-      <a mat-flat-button routerLink="/scoreboard" aria-label="Launch Scoreboard">
-        <mat-icon>open_in_new</mat-icon>
-      </a>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
-
 <div class="manage-form">
-  <div class="manage-gamesets">
-    <app-select-gameset></app-select-gameset>
+  <div>
+    <mat-accordion multi="true">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Create New Set
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="new-game">
+          <form [formGroup]="newSetForm" (ngSubmit)="createNewSet()">
+            <h3>Create new Set</h3>
+            <div class="set-players">
+              <div class="set-player" formGroupName="player1">
+                <mat-form-field class="player-name">
+                  <mat-label>Player 1</mat-label>
+                  <mat-select formControlName="player">
+                    <mat-option *ngFor="let player of players$ | async" [value]="player">
+                      {{ player.name | playerName:player.team }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="set-player" formGroupName="player2">
+                <mat-form-field class="player-name">
+                  <mat-label>Player 2</mat-label>
+                  <mat-select formControlName="player">
+                    <mat-option *ngFor="let player of players$ | async" [value]="player">
+                      {{ player.name | playerName:player.team }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <input type="hidden" formControlName="live">
+            <button mat-flat-button color="primary" type="submit" aria-label="Save">
+              <mat-icon>done</mat-icon>
+              <span> Save</span>
+            </button>
+          </form>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            List of Sets
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="sets-list">
+          <ng-container *ngIf="gameSetsList$ | async as gameSetList">
+            <mat-list role="list" *ngIf="gameSetList.length > 0; else noSets">
+              <mat-list-item role="listitem" *ngFor="let gameset of gameSetList">
+                <ng-container *ngIf="gameset.player1.player; else emptyGameset">
+                  <div class="set-details">
+                    <div class="set-number">
+                      {{ gameset.game }}
+                    </div>
+                    <div class="set-players">
+                      <div class="player-icon">
+                        <img matListAvatar src="/assets/stock-icons/link.png" alt="Link">
+                      </div>
+                      <div class="player-name">
+                        <span>{{ gameset.player1.player.name | playerName:gameset.player1.player.team }}</span>
+                      </div>
+                      <div class="player-divider">
+                        <span>&mdash;</span>
+                      </div>
+                      <div class="player-icon">
+                        <img matListAvatar src="/assets/stock-icons/ganondorf.png" alt="Link">
+                      </div>
+                      <div class="player-name">
+                        {{ gameset.player2.player.name | playerName:gameset.player2.player.team }}
+                      </div>
+                    </div>
+                    <div class="set-score">
+                      {{ gameset.player1.score }} - {{ gameset.player2.score }}
+                    </div>
+                    <div class="set-status">
+                      <div class="live-marker" [class.live]="gameset.live"></div>
+                    </div>
+                    <button mat-icon-button [matMenuTriggerFor]="manageSet" aria-label="Manage Set">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #manageSet="matMenu">
+                      <button mat-menu-item (click)="modifySet(gameset)">
+                        <mat-icon>edit</mat-icon>
+                        Modify
+                      </button>
+                      <button mat-menu-item (click)="deleteGameset(gameset)">
+                        <mat-icon>delete_forever</mat-icon>
+                        Delete
+                      </button>
+                      <button mat-menu-item (click)="setLiveGameset(gameset)">
+                        <ng-container *ngIf="gameset.live === false; else onlineState">
+                          <mat-icon>play_arrow</mat-icon>
+                          Go Live
+                        </ng-container>
+                        <ng-template #onlineState>
+                          <mat-icon>stop</mat-icon>
+                          Go Offline
+                        </ng-template>
+
+                      </button>
+                    </mat-menu>
+                  </div>
+                </ng-container>
+                <ng-template #emptyGameset>
+                  <i>No players selected</i>
+                </ng-template>
+              </mat-list-item>
+            </mat-list>
+            <ng-template #noSets>
+              <p>No sets created.</p>
+            </ng-template>
+
+          </ng-container>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
   </div>
-  <div class="manage-players">
-    <app-select-set-players></app-select-set-players>
+
+
+  <div class="manage-gamesets">
+    <app-live-set-preview [gameset]="liveGameSet$ | async"></app-live-set-preview>
+
+    <form [formGroup]="manageGamesetForm" (ngSubmit)="update()">
+      <h3>Manage Set {{ game }}</h3>
+
+      <input type="hidden" formControlName="_id">
+      <input type="hidden" formControlName="game">
+      <input type="hidden" formControlName="live">
+
+      <div class="set-players">
+        <div class="set-player" formGroupName="player1">
+          <mat-form-field class="player-name">
+            <mat-label>Player 1</mat-label>
+            <mat-select formControlName="player" [compareWith]="compareValFn">
+              <mat-option *ngFor="let player of players$ | async" [value]="player">
+                {{ player.name | playerName:player.team }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <mat-form-field>
+            <mat-label>Character</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let character of characters$ | async">
+                <img src="/assets/images/characters/{{ character.image }}" alt="{{ character.title }}"/>
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+          <mat-form-field class="player-score">
+            <mat-label>Score</mat-label>
+            <input matInput formControlName="score" placeholder="Score" type="text">
+          </mat-form-field>
+          <div class="score-controls">
+            <button mat-icon-button color="basic" type="button" aria-label="Add"
+              (click)="updateScore(1, 'add')">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+            <button mat-icon-button color="basic" type="button" aria-label="Add"
+              (click)="updateScore(1, 'subtract')">
+              <mat-icon>remove_circle</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="set-player" formGroupName="player2">
+          <mat-form-field class="player-name">
+            <mat-label>Player 2</mat-label>
+            <mat-select formControlName="player" [compareWith]="compareValFn">
+              <mat-option *ngFor="let player of players$ | async" [value]="player">
+                {{ player.name | playerName:player.team }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="player-score">
+            <mat-label>Score</mat-label>
+            <input matInput formControlName="score" placeholder="Score" type="text">
+          </mat-form-field>
+          <div class="score-controls">
+            <button mat-icon-button color="basic" type="button" aria-label="Add"
+              (click)="updateScore(2, 'add')">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+            <button mat-icon-button color="basic" type="button" aria-label="Add"
+              (click)="updateScore(2, 'subtract')">
+              <mat-icon>remove_circle</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="gameset-form-controls">
+        <button mat-flat-button color="primary" type="submit" aria-label="Update Set">
+          <mat-icon>save</mat-icon>
+          <span> Update Set</span>
+        </button>
+      </div>
+    </form>
   </div>
 
 </div>
-

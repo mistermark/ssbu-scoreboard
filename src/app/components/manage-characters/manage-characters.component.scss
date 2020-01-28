@@ -1,0 +1,129 @@
+$shadow-distance: 1px;
+$shadow-blur: 1px;
+$shadow-color: rgb(0, 0, 0);
+
+.manage-form {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  > div {
+    flex-grow: 1;
+    padding: 1rem;
+  }
+  div.col-2 {
+    width: 25%;
+  }
+}
+
+.add-single-character {
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.mat-list-item {
+  height: 4rem;
+  padding: 0.2rem 0;
+}
+
+mat-grid-list {
+  .selected {
+    background-color: rgba(43, 137, 253, 0.4);
+    a {
+      box-shadow: inset 0 0 4px 4px #063eff;
+    }
+  }
+  .character {
+    cursor: pointer;
+    position: relative;
+    background: transparent center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+    &:hover .list-item-controls {
+      display: block;
+    }
+  }
+  .character-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: -#{$shadow-distance} -#{$shadow-distance} $shadow-blur $shadow-color,
+      -#{$shadow-distance} $shadow-distance $shadow-blur $shadow-color,
+      $shadow-distance $shadow-distance $shadow-blur $shadow-color,
+      $shadow-distance -#{$shadow-distance} $shadow-blur $shadow-color;
+  }
+  .list-item-controls {
+    float: right;
+    padding: 0.2rem 0.4rem;
+    background-color: rgba(255, 255, 255, 0.6);
+    display: none;
+  }
+}
+
+.update-character {
+  display: flex;
+  flex-direction: column;
+
+  .mat-card-header {
+    align-items: center;
+  }
+  ::ng-deep .mat-card-header-text {
+    flex-grow: 1;
+  }
+
+  mat-card-content {
+    padding: 0.6rem 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  mat-card-actions {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .mat-card-title {
+    margin-bottom: 0;
+  }
+
+  .form-actions {
+    button {
+      margin-right: 0.6rem;
+      span {
+        margin-left: 0.2rem;
+      }
+    }
+  }
+}
+
+.character-avatar {
+  background: #fff center no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  &.no-avatar {
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    background-color: #eee;
+    background-image: none;
+  }
+}
+
+.multiple-characters {
+  width: 100%;
+}

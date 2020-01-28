@@ -2,6 +2,64 @@
   flex: 1 1 auto;
 }
 
+.manage-form {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+
+  > div {
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 1rem;
+  }
+  .gameset-form-controls {
+    button {
+      margin-right: 0.6rem;
+    }
+  }
+}
+.set-details {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  .set-number,
+  .set-players,
+  .set-score {
+    display: flex;
+    align-items: center;
+  }
+  .set-number {
+    font-weight: bold;
+    justify-content: center;
+    align-self: center;
+    margin-right: 1rem;
+  }
+  .set-players {
+    flex: 1;
+  }
+  .set-score {
+    margin-left: auto;
+  }
+  .set-status {
+    display: flex;
+    align-items: center;
+    margin-left: 0.8rem;
+  }
+  .live-marker {
+    height: 16px;
+    width: 16px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    background-color: #ccc;
+    border-radius: 0.5rem;
+    &.live {
+      background-color: #f00;
+      box-shadow: 0 0 2px rgba(255, 0, 0, 0.8);
+    }
+  }
+  .player-divider {
+    margin: 0 0.4rem;
+  }
+}
 .actions {
   button,
   a {
@@ -11,7 +69,59 @@
 .game-player {
   display: flex;
 }
-app-player-select {
-  flex: 1 1 auto;
-  margin-right: 0.6rem;
+
+.new-game {
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.manage-gameset {
+  display: flex;
+  form {
+    flex: 1;
+  }
+  mat-form-field {
+    width: 100%;
+  }
+  .gameset-controls {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+}
+
+.manage-gamesets {
+  .set-players {
+    display: flex;
+    flex-direction: column;
+  }
+  .set-player {
+    display: flex;
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    .player-score {
+      margin-left: auto;
+      width: 3rem;
+    }
+    .score-controls {
+      display: flex;
+      align-items: center;
+    }
+    .player-name {
+      flex: 1 0 auto;
+    }
+  }
+  .form-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
 }

@@ -1,8 +1,25 @@
 <div class="app-layout">
-  <div class="app-scoreboard">
+  <div class="app-header">
+    <div><h2>SSBU Scoreboard</h2></div>
+  </div>
+
+  <mat-sidenav-container class="app-content">
+    <mat-sidenav #sidenav mode="side" opened>
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let navItem of navItems">
+          {{ navItem }}
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <p>Forms and stuff</p>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- <div class="app-scoreboard">
     <app-manage-scoreboard></app-manage-scoreboard>
   </div>
   <div class="app-players">
     <app-manage-players></app-manage-players>
-  </div>
+  </div> -->
 </div>

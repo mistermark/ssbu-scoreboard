@@ -1,16 +1,30 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from '../components/dashboard/dashboard.component';
-import { ScoreboardComponent } from '../components/scoreboard/scoreboard.component';
+import { ManagePlayersComponent } from '../components/manage-players/manage-players.component';
+import { ManageCharactersComponent } from '../components/manage-characters/manage-characters.component';
+import { ManageScoreboardComponent } from '../components/manage-scoreboard/manage-scoreboard.component';
+import { ManageStagesComponent } from '../components/manage-stages/manage-stages.component';
 
 export const appRoutes: Routes = [
   {
-    path: 'scoreboard',
-    component: ScoreboardComponent
+    path: 'players',
+    component: ManagePlayersComponent
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent
+    path: 'characters',
+    component: ManageCharactersComponent
   },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+  {
+    path: 'sets',
+    component: ManageScoreboardComponent
+  },
+  {
+    path: 'stages',
+    component: ManageStagesComponent
+  },
+  // {
+  //   path: 'games',
+  //   component: ManageGamesComponent
+  // },
+  { path: '', redirectTo: '/stages', pathMatch: 'full' }
 ];

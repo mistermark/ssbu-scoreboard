@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectGamesetComponent } from './select-gameset.component';
+import { LiveSetPreviewComponent } from './live-set-preview.component';
 
-describe('SelectGamesetComponent', () => {
-  let component: SelectGamesetComponent;
-  let fixture: ComponentFixture<SelectGamesetComponent>;
+describe('LiveSetPreviewComponent', () => {
+  let component: LiveSetPreviewComponent;
+  let fixture: ComponentFixture<LiveSetPreviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectGamesetComponent ]
+      declarations: [ LiveSetPreviewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectGamesetComponent);
+    fixture = TestBed.createComponent(LiveSetPreviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,11 +1,25 @@
 .app-layout {
   display: grid;
-  grid-template-areas: "scoreboard" "players";
+  grid-template-areas: "header" "app-content";
   grid-template-rows: auto 1fr;
   grid-template-columns: 1fr;
-}
-.app-header {
-  grid-area: header;
+  width: 100vw;
+  height: 100vh;
+
+  .app-header {
+    grid-area: header;
+    padding: 1rem;
+  }
+  .aside-content {
+    grid-area: app-content;
+  }
+  mat-sidenav {
+    width: 12rem;
+    padding: 1rem;
+  }
+  mat-sidenav-content {
+    padding: 1rem;
+  }
 }
 .app-scoreboard {
   grid-area: scoreboard;

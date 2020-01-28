@@ -31,7 +31,7 @@ export class PlayerScoreComponent implements OnInit {
   // }
 
   ngOnInit() {
-    this.charactersService.get();
+    this.charactersService.getCharacters();
     // this.getCharacterImage(this.character);
   }
 }

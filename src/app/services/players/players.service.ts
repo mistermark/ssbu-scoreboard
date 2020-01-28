@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, tap, map } from 'rxjs/operators';
 
 import { Player } from '../../types';
 import { PlayersApiService } from '../players-api/players-api.service';
 import { StorageService } from '../storage/storage.service';
-import { MessageService } from '../message/message.service';
 import { NotificationService } from '../notification/notification.service';
 import { PlayerNamePipe } from 'src/app/modules/player-fullname.pipe';
 

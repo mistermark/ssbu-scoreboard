@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { map, filter, tap } from 'rxjs/operators';
+import { map, tap, filter } from 'rxjs/operators';
 
-import { Player, SetPlayer, GameSet } from '../../types';
+import { GameSet, SetPlayer } from '../../types';
 
-import { StorageService } from '../storage/storage.service';
 import { GamesetApiService } from '../gameset-api/gameset-api.service';
 import { NotificationService } from '../notification/notification.service';
-import { PlayerNamePipe } from 'src/app/modules/player-fullname.pipe';
-
-const STORAGE_NAME = 'ssbu-game-set';
 
 @Injectable({
   providedIn: 'root'
@@ -23,38 +19,53 @@ export class GameSetService {
   );
   gameSetsList$ = this.gameSetsListSubject.asObservable();
 
-  // getInterval = 1000;
-  // setInterval: any;
+  private gameSetLiveSubject = new BehaviorSubject<GameSet | undefined>(
+    undefined
+  );
+  gameSetLive$ = this.gameSetLiveSubject.asObservable();
 
   constructor(
     protected gamesetApiService: GamesetApiService,
-    private notificationService: NotificationService,
-    private playerNamePipe: PlayerNamePipe
+    private notificationService: NotificationService
   ) {
-    this.getGameSetsList();
+    this.getList();
   }
 
   selectGameSet(gameset): void {
     this.gameSetSubject.next(gameset);
   }
 
-  create(gamesetObject): void {
-    const lastGameNumber = this.gameSetsListSubject.value[
-      this.gameSetsListSubject.value.length - 1
-    ].game;
-    gamesetObject.game = lastGameNumber + 1;
-    this.gamesetApiService.create(gamesetObject).subscribe(data => {
-      this.gameSetSubject.next(data);
+  create(setObject): void {
+    let lastGameNumber = 0;
+    if (this.gameSetsListSubject.value.length !== 0) {
+      lastGameNumber = this.gameSetsListSubject.value[
+        this.gameSetsListSubject.value.length - 1
+      ].game;
+    }
+    setObject.game = lastGameNumber + 1;
+    this.gamesetApiService.create(setObject).subscribe(data => {
       this.notificationService.notify(`New GameSet has been created.`, 'OK');
+      this.getList();
     });
   }
 
   update(setObject: GameSet): void {
-    this.gamesetApiService.update(setObject).subscribe(data => {
+    this.gamesetApiService.update(setObject).subscribe(updatedSet => {
+      this.gameSetSubject.next(updatedSet);
+      if (updatedSet.live === true) {
+        this.gameSetLiveSubject.next(updatedSet);
+      }
       this.notificationService.notify(
-        `GameSet #${data.game} has been updated.`,
+        `GameSet #${updatedSet.game} has been updated.`,
         'OK'
       );
+      const updatedSetList = this.gameSetsListSubject.value.map(setList => {
+        if (setList._id === updatedSet._id) {
+          setList = updatedSet;
+        }
+        return setList;
+      });
+      this.gameSetsListSubject.next(updatedSetList);
     });
   }
 
@@ -65,11 +76,11 @@ export class GameSetService {
         has been deleted.`,
         'OK'
       );
-      this.getGameSetsList();
+      this.getList();
     });
   }
 
-  getGameSetsList(): void {
+  getList(): void {
     this.gamesetApiService
       .getGameSetsList()
       .pipe(
@@ -80,13 +91,41 @@ export class GameSetService {
       .subscribe(
         setsList => {
           this.gameSetsListSubject.next(setsList);
+          setsList.filter(gameSet => {
+            if (gameSet.live === true) {
+              this.gameSetLiveSubject.next(gameSet);
+            }
+          });
         },
         err => {
           this.notificationService.notify(
-            `Couldn't fetch game-sets.`,
+            `Couldn't fetch list of games.`,
             'Dismiss'
           );
         }
       );
+  }
+
+  toggleLiveGame(gameset: GameSet): void {
+    gameset.live = !gameset.live;
+
+    this.gameSetSubject.next(gameset);
+
+    if (
+      this.gameSetLiveSubject.value &&
+      this.gameSetLiveSubject.value._id !== gameset._id
+    ) {
+      this.gameSetLiveSubject.value.live = !this.gameSetLiveSubject.value.live;
+      this.update(this.gameSetLiveSubject.value);
+      this.gameSetLiveSubject.next(undefined);
+    }
+
+    if (this.gameSetLiveSubject.value) {
+      this.gameSetLiveSubject.next(undefined);
+    } else {
+      this.gameSetLiveSubject.next(gameset);
+    }
+
+    this.update(gameset);
   }
 }

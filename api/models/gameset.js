@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const schema = new mongoose.Schema(
   {
     game: Number,
+    live: Boolean,
     player1: {
       player: Object,
       score: Number

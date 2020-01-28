@@ -1,3 +1,4 @@
 export * from './player';
 export * from './character';
-export * from './gameset';
+export * from './games';
+export * from './stage';

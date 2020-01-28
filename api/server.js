@@ -8,6 +8,9 @@ let express = require("express"),
 
 require("./models/player");
 require("./models/gameset");
+require("./models/livegame");
+require("./models/character");
+require("./models/stage");
 
 // Connecting with mongo db
 mongoose.Promise = global.Promise;
@@ -28,6 +31,9 @@ mongoose
 // Setting up port with express js
 const playerRoute = require("../api/routes/player.route");
 const gamesetRoute = require("../api/routes/gameset.route");
+const liveGameRoute = require("../api/routes/livegame.route");
+const characterRoute = require("../api/routes/character.route");
+const stageRoute = require("../api/routes/stage.route");
 const app = express();
 app.use(bodyParser.json());
 app.use(
@@ -40,6 +46,9 @@ app.use(express.static(path.join(__dirname, "dist/mean-stack-crud-app")));
 app.use("/", express.static(path.join(__dirname, "dist/mean-stack-crud-app")));
 app.use("/api/players", playerRoute);
 app.use("/api/sets", gamesetRoute);
+app.use("/api/live", liveGameRoute);
+app.use("/api/characters", characterRoute);
+app.use("/api/stages", stageRoute);
 
 // Create port
 const port = process.env.PORT || 4000;

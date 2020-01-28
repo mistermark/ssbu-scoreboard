@@ -8,7 +8,7 @@ import { GameSetService } from '../../services/game-set/game-set.service';
   styleUrls: ['./scoreboard.component.scss']
 })
 export class ScoreboardComponent implements OnInit {
-  // gameSet$ = this.gameSetService.gameSet$;
+  liveGameSet$ = this.gameSetService.gameSet$;
 
   constructor(private readonly gameSetService: GameSetService) {}
 

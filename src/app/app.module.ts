@@ -16,6 +16,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { appRoutes } from './modules/routing.config';
 import { AppComponent } from './app.component';
@@ -32,7 +39,13 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { PlayersListComponent } from './components/manage-players/players-list/players-list.component';
 import { PlayerDetailsComponent } from './components/manage-players/player-details/player-details.component';
 import { PlayerNamePipe } from './modules/player-fullname.pipe';
-import { SelectGamesetComponent } from './components/manage-scoreboard/select-gameset/select-gameset.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { LiveSetPreviewComponent } from './components/live-set-preview/live-set-preview.component';
+import { ManageCharactersComponent } from './components/manage-characters/manage-characters.component';
+import { ImagePathPipe } from './modules/image-path.pipe';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { ManageStagesComponent } from './components/manage-stages/manage-stages.component';
+import { StageTypePipe } from './modules/stage-type.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +63,13 @@ import { SelectGamesetComponent } from './components/manage-scoreboard/select-ga
     PlayersListComponent,
     PlayerDetailsComponent,
     PlayerNamePipe,
-    SelectGamesetComponent
+    PageHeaderComponent,
+    LiveSetPreviewComponent,
+    ManageCharactersComponent,
+    ImagePathPipe,
+    DialogComponent,
+    ManageStagesComponent,
+    StageTypePipe
   ],
   imports: [
     BrowserModule,
@@ -69,9 +88,17 @@ import { SelectGamesetComponent } from './components/manage-scoreboard/select-ga
     ReactiveFormsModule,
     MatRippleModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatGridListModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatExpansionModule
   ],
   providers: [PlayerNamePipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogComponent]
 })
 export class AppModule {}

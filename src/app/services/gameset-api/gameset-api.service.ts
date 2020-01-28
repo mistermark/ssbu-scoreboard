@@ -3,7 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { SetPlayer, GameSet } from 'src/app/types';
+import { GameSet } from 'src/app/types';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,7 @@ export class GamesetApiService {
         `${this.gamesetUrl}/update/${setObject._id}`,
         {
           game: setObject.game,
+          live: setObject.live,
           player1: setObject.player1,
           player2: setObject.player2
         },
@@ -61,5 +62,9 @@ export class GamesetApiService {
     return this.http
       .delete<GameSet>(`${this.gamesetUrl}/delete/${id}`, this.httpOptions)
       .pipe(catchError(this.handleError));
+  }
+
+  setLive(set: GameSet): any {
+    return set;
   }
 }

@@ -1,0 +1,8 @@
+<mat-dialog-content>
+  <p>{{message}}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="warn" (click)="onConfirmClick()">{{confirmButtonText}}</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>{{cancelButtonText}}</button>
+</mat-dialog-actions>

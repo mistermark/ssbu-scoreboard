@@ -1,0 +1,116 @@
+<div class="manage-form">
+  <div class="col-1">
+    <mat-accordion multi="true">
+      <mat-expansion-panel class="add-single-character">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Add new Character</mat-panel-title>
+        </mat-expansion-panel-header>
+        <form [formGroup]="createCharacterForm" (ngSubmit)="create()">
+          <mat-form-field class="character-name">
+            <input matInput #characterName formControlName="name" placeholder="Character Name" type="text">
+          </mat-form-field>
+          <mat-form-field class="character-image">
+            <input matInput #characterImage formControlName="image" placeholder="Character Image" type="text">
+          </mat-form-field>
+          <mat-form-field class="character-roster">
+            <input matInput #characterRoster formControlName="roster" placeholder="Roster Position" type="number">
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" aria-label="Save Character">
+            <mat-icon>done</mat-icon>
+            <span>Add Character</span>
+          </button>
+        </form>
+      </mat-expansion-panel>
+      <mat-expansion-panel class="add-multiple-characters">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Add multiple new Characters</mat-panel-title>
+        </mat-expansion-panel-header>
+        <form [formGroup]="createCharacterBulkForm" (ngSubmit)="createBulk()">
+          <p>Add multiple characters by separating them with a linebreak.<br>
+            Format for every character is <code>[NAME],[IMAGE]</code>.<br>
+            Example: <code>Mario,mario-avatar-image.png</code>.</p>
+          <mat-form-field class="multiple-characters">
+            <textarea matInput formControlName="multipleCharacters" placeholder="Muliple characters (1 character per line)" cols="30" rows="10"></textarea>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" aria-label="Save Character">
+            <mat-icon>done</mat-icon>
+          </button>
+        </form>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            List of Characters
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="characters-list">
+          <ng-container *ngIf="charactersList$ | async as charactersList; else noCharacters">
+            <mat-grid-list cols="5">
+              <mat-grid-tile *ngFor="let character of charactersList"
+                [class.selected]="(selectedCharacter$ | async) === character">
+                <a class="character" [ngStyle]="character.styles" (click)="selectCharacter(character)">
+                  <div class="character-name">
+                    <span>{{ character.name }}</span>
+                  </div>
+                  <div class="list-item-controls">
+                    <mat-icon aria-label="Delete" (click)="delete(character)">delete</mat-icon>
+                  </div>
+                </a>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </ng-container>
+          <ng-template #noCharacters>
+            <p>No characters found.</p>
+          </ng-template>
+        </div>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </div>
+  <div class="col-2">
+    <mat-card class="update-character">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <div class="character-avatar"
+            [ngStyle]="{'background-image': 'url('+ (updateCharacterForm?.value.image | imagePath:'characters') + ')'}"
+            [class.no-avatar]="updateCharacterForm.value">
+          </div>
+        </div>
+        <mat-card-title>Character Details</mat-card-title>
+        <button mat-icon-button color="basic" type="button" aria-label="Delete"
+          [disabled]="!updateCharacterForm.value._id" (click)="delete(updateCharacterForm.value)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-header>
+      <form [formGroup]="updateCharacterForm" (ngSubmit)="update()">
+        <input type="hidden" formControlName="_id">
+      <mat-card-content>
+        <ng-container *ngIf="updateCharacterForm.value; else noCharacterSelected">
+          <mat-form-field class="character-name">
+            <input matInput #characterUpdateName formControlName="name" placeholder="Character Name" type="text">
+          </mat-form-field>
+          <mat-form-field class="character-image">
+            <input matInput #characterUpdateImage formControlName="image" placeholder="Character Image" type="text">
+          </mat-form-field>
+          <mat-form-field class="character-roster">
+            <input matInput #characterUpdateRoster formControlName="roster" placeholder="Roster Position" type="number">
+          </mat-form-field>
+        </ng-container>
+        <ng-template #noCharacterSelected>
+          <p>Select a character to view or update details</p>
+        </ng-template>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" aria-label="Update Character"
+          [disabled]="!updateCharacterForm.value._id">
+          <mat-icon>done</mat-icon> <span>Update</span>
+        </button>
+        <button mat-raised-button color="basic" type="reset" aria-label="Cancel"
+          [disabled]="!updateCharacterForm.value._id">
+          <mat-icon>cancel</mat-icon> <span>Cancel</span>
+        </button>
+      </mat-card-actions>
+    </form>
+    </mat-card>
+  </div>
+</div>

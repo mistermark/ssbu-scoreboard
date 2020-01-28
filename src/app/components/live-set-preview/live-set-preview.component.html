@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon>live_tv</mat-icon>
+    </div>
+    <mat-card-title>
+      <span>LIVE SET</span>
+      <div class="live-marker" [class.live]="gameset">
+        <div class="feature">
+          <div class="dot"></div>
+          <div class="ring"></div>
+        </div>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-container *ngIf="gameset; else noLiveSet">
+      <div class="set-players">
+        <div class="set-player">
+          <div class="player-name">{{ gameset.player1.player.name | playerName:gameset.player1.player.team }}</div>
+          <div class="player-score">{{ gameset.player1.score }}</div>
+        </div>
+        <div class="set-player">
+          <div class="player-score">{{ gameset.player2.score }}</div>
+          <div class="player-name">{{ gameset.player2.player.name | playerName:gameset.player2.player.team }}</div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #noLiveSet>
+      <div class="empty-data">
+        <div class="set-players">
+          <div class="set-player">
+            <div class="player-name">&nbsp;</div>
+            <div class="player-score">&nbsp;</div>
+          </div>
+          <div class="set-player">
+            <div class="player-score">&nbsp;</div>
+            <div class="player-name">&nbsp;</div>
+          </div>
+        </div>
+        <div class="no-games">
+          <p>No game is currently being played</p>
+        </div>
+      </div>
+    </ng-template>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="goOffline(gameset)" [disabled]="!gameset">STOP</button>
+  </mat-card-actions>
+</mat-card>
