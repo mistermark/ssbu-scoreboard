@@ -4,12 +4,13 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { Stage } from 'src/app/types';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StagesApiService {
-  private stagesUrl = 'http://localhost:4000/api/stages'; // URL to web api
+  private stagesUrl = `${environment.apiUrl}/api/stages`; // URL to web api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

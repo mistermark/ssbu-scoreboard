@@ -4,12 +4,13 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { Player } from 'src/app/types';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayersApiService {
-  private playersUrl = 'http://localhost:4000/api/players'; // URL to web api
+  private playersUrl = `${environment.apiUrl}/api/players`; // URL to web api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

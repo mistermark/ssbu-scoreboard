@@ -7,12 +7,10 @@ import { PlayersApiService } from '../players-api/players-api.service';
 import { StorageService } from '../storage/storage.service';
 import { NotificationService } from '../notification/notification.service';
 import { PlayerNamePipe } from 'src/app/modules/player-fullname.pipe';
-
-import * as PlayersList from '../../../assets/data/players.json';
 import { UtilsService } from '../../modules/utils';
+import { environment } from 'src/environments/environment';
 
 const STORAGE_NAME = 'ssbu-players';
-const MOCK_PLAYERS: Player[] = (PlayersList as any).default;
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +27,7 @@ export class PlayersService {
     this.getPlayers();
   }
 
-  private playersUrl = 'http://localhost:4000/api'; // URL to web api
+  private playersUrl = `${environment.apiUrl}/api/players`; // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -88,15 +86,5 @@ export class PlayersService {
       );
       this.getPlayers();
     });
-  }
-
-  initPlayers(): void {
-    this.storageService.set(STORAGE_NAME, MOCK_PLAYERS);
-    this.getPlayers();
-  }
-
-  resetPlayers(): void {
-    this.storageService.remove(STORAGE_NAME);
-    this.playersSubject.next([]);
   }
 }

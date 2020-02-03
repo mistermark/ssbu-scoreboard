@@ -4,12 +4,13 @@ import { Observable, of } from 'rxjs';
 
 import { GameSet } from 'src/app/types';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LivegameApiService {
-  private gamesetUrl = 'http://localhost:4000/api/live'; // URL to web api
+  private gamesetUrl = `${environment.apiUrl}/api/live`; // URL to web api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

@@ -3,13 +3,14 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from 'src/environments/environment';
 import { Character } from 'src/app/types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharactersApiService {
-  private charactersUrl = 'http://localhost:4000/api/characters'; // URL to web api
+  private charactersUrl = `${environment.apiUrl}/api/characters`; // URL to web api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

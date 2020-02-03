@@ -7,7 +7,9 @@ import {
 } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
-const url = 'http://localhost:4000/api/upload';
+import { environment } from 'src/environments/environment';
+
+const url = `${environment.apiUrl}/api/upload`;
 
 @Injectable({
   providedIn: 'root'
