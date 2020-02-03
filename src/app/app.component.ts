@@ -25,4 +25,6 @@ export class AppComponent {
       route: '/stages'
     }
   ];
+
+  constructor() {}
 }

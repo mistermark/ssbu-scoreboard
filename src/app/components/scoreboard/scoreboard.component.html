@@ -1,4 +1,4 @@
-<app-player-score *ngFor="let player of (gameSet$ | async)"
+<app-player-score *ngFor="let player of (liveGameSet$ | async)"
   [name]="player.fullname | uppercase"
   [arrange]="player.player"
   [character]="player.character"

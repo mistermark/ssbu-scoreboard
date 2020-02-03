@@ -26,5 +26,5 @@ export const appRoutes: Routes = [
   //   path: 'games',
   //   component: ManageGamesComponent
   // },
-  { path: '', redirectTo: '/stages', pathMatch: 'full' }
+  { path: '', redirectTo: '/players', pathMatch: 'full' }
 ];

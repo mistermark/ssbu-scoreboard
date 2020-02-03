@@ -125,7 +125,7 @@
     <app-live-set-preview [gameset]="liveGameSet$ | async"></app-live-set-preview>
 
     <form [formGroup]="manageGamesetForm" (ngSubmit)="update()">
-      <h3>Manage Set {{ game }}</h3>
+      <h3>Manage Set</h3>
 
       <input type="hidden" formControlName="_id">
       <input type="hidden" formControlName="game">

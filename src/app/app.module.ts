@@ -32,10 +32,7 @@ import { ScoreboardComponent } from './components/scoreboard/scoreboard.componen
 import { PlayerScoreComponent } from './components/scoreboard/player-score/player-score.component';
 import { ManageScoreboardComponent } from './components/manage-scoreboard/manage-scoreboard.component';
 import { ManagePlayersComponent } from './components/manage-players/manage-players.component';
-import { SelectSetPlayersComponent } from './components/manage-scoreboard/select-set-players/select-set-players.component';
 import { CharacterSelectComponent } from './components/character-select/character-select.component';
-import { ScoreboardScoreComponent } from './components/manage-scoreboard/scoreboard-score/scoreboard-score.component';
-import { AddPlayerComponent } from './components/manage-players/add-player/add-player.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { PlayersListComponent } from './components/manage-players/players-list/players-list.component';
 import { PlayerDetailsComponent } from './components/manage-players/player-details/player-details.component';
@@ -57,10 +54,7 @@ import { UploadComponent } from './components/upload/upload.component';
     PlayerScoreComponent,
     ManageScoreboardComponent,
     ManagePlayersComponent,
-    SelectSetPlayersComponent,
     CharacterSelectComponent,
-    ScoreboardScoreComponent,
-    AddPlayerComponent,
     MessagesComponent,
     PlayersListComponent,
     PlayerDetailsComponent,

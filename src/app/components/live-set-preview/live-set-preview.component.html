@@ -17,12 +17,12 @@
     <ng-container *ngIf="gameset; else noLiveSet">
       <div class="set-players">
         <div class="set-player">
-          <div class="player-name">{{ gameset.player1.player.name | playerName:gameset.player1.player.team }}</div>
+          <div class="player-name">{{ gameset.player1?.player.name | playerName:gameset.player1.player.team }}</div>
           <div class="player-score">{{ gameset.player1.score }}</div>
         </div>
         <div class="set-player">
           <div class="player-score">{{ gameset.player2.score }}</div>
-          <div class="player-name">{{ gameset.player2.player.name | playerName:gameset.player2.player.team }}</div>
+          <div class="player-name">{{ gameset.player2?.player.name | playerName:gameset.player2.player.team }}</div>
         </div>
       </div>
     </ng-container>

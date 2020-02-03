@@ -27,12 +27,4 @@ export class ManagePlayersComponent implements OnInit {
   }
 
   ngOnInit() {}
-
-  resetPlayers() {
-    this.playersService.resetPlayers();
-  }
-
-  initPlayers() {
-    this.playersService.initPlayers();
-  }
 }
